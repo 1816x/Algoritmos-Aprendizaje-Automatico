@@ -1,0 +1,226 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNLD2dLnsPzkpXmdhIoi22Y",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/1816x/Algoritmos-Aprendizaje-Automatico/blob/main/Practica%20Tema%203%20Experimento%20de%20validaci%C3%B3n\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "acf1e421",
+        "outputId": "bcce7fef-51e0-4318-fd5f-f0a224f18aa0"
+      },
+      "source": [
+        "from sklearn.datasets import load_breast_cancer\n",
+        "import pandas as pd\n",
+        "\n",
+        "data = load_breast_cancer()\n",
+        "X = pd.DataFrame(data.data, columns=data.feature_names)\n",
+        "y = data.target\n",
+        "\n",
+        "print(\"Dataset loaded successfully. X and y are now defined.\")"
+      ],
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Dataset loaded successfully. X and y are now defined.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "054c10f5",
+        "outputId": "737c370d-472f-4652-a254-8f66f2e84f20"
+      },
+      "source": [
+        "from sklearn.model_selection import train_test_split\n",
+        "\n",
+        "# La Partición Básica\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+        "\n",
+        "print(f\"Tamaño del conjunto de entrenamiento X: {X_train.shape}\")\n",
+        "print(f\"Tamaño del conjunto de prueba X: {X_test.shape}\")\n",
+        "print(f\"Tamaño del conjunto de entrenamiento y: {y_train.shape}\")\n",
+        "print(f\"Tamaño del conjunto de prueba y: {y_test.shape}\")"
+      ],
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Tamaño del conjunto de entrenamiento X: (455, 30)\n",
+            "Tamaño del conjunto de prueba X: (114, 30)\n",
+            "Tamaño del conjunto de entrenamiento y: (455,)\n",
+            "Tamaño del conjunto de prueba y: (114,)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "80d4cb7c"
+      },
+      "source": [
+        "### Justificación de la Partición Básica\n",
+        "\n",
+        "He utilizado una proporción de 80/20, lo que significa que el 80% de los datos se destinarán al entrenamiento (`X_train`, `y_train`) y el 20% restante a la prueba (`X_test`, `y_test`). Con 569 registros en total, esto resulta en aproximadamente 455 registros para entrenamiento y 114 para prueba.\n",
+        "\n",
+        "Esta proporción es adecuada para este dataset de tamaño mediano por varias razones:\n",
+        "\n",
+        "*   **Suficientes datos para entrenamiento:** 455 registros son suficientes para que el modelo aprenda patrones significativos sin ser propenso al sobreajuste si el conjunto de datos de entrenamiento fuera demasiado pequeño.\n",
+        "*   **Conjunto de prueba representativo:** 114 registros proporcionan una muestra razonable para evaluar el rendimiento generalizado del modelo. Un conjunto de prueba demasiado pequeño podría no ser representativo.\n",
+        "*   **Equilibrio:** Permite un buen equilibrio entre proporcionar al modelo suficientes datos para aprender y tener una muestra independiente lo suficientemente grande para una evaluación fiable. Para datasets muy grandes, a menudo se usan proporciones como 90/10 o incluso 95/5, mientras que para datasets muy pequeños, a veces se opta por 70/30 o se priorizan técnicas de validación cruzada para maximizar el uso de los datos."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fa649554"
+      },
+      "source": [
+        "from sklearn.model_selection import KFold, cross_val_score\n",
+        "\n",
+        "# Evaluación Robusta (K-Fold)\n",
+        "# Configura un objeto KFold con shuffle=True\n",
+        "# Se usa shuffle=True para asegurar que cada fold sea representativo de todo el dataset\n",
+        "kf = KFold(n_splits=5, shuffle=True, random_state=42)"
+      ],
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1dfc6878"
+      },
+      "source": [
+        "### Justificación de K-Fold\n",
+        "\n",
+        "He elegido un valor de `k=5` para `n_splits`. Esto significa que el conjunto de datos se dividirá en 5 folds, y el modelo se entrenará y evaluará 5 veces. En cada iteración, 4 folds se usarán para entrenamiento y 1 para validación.\n",
+        "\n",
+        "Esta elección de `k=5` es un compromiso práctico y común para muchos datasets. Permite una evaluación robusta del modelo, reduciendo la varianza del rendimiento de la estimación sin incurrir en un costo computacional excesivamente alto.\n",
+        "\n",
+        "**¿Qué pasaría con el costo computacional si eligieras k=569?**\n",
+        "\n",
+        "Si eligiéramos `k=569`, estaríamos realizando una **Validación Cruzada Leave-One-Out (LOOCV)**. En este escenario, `k` es igual al número total de registros en el dataset (569). Esto implicaría:\n",
+        "\n",
+        "*   El modelo se entrenaría y evaluaría 569 veces.\n",
+        "*   En cada iteración, el modelo se entrenaría con 568 registros y se evaluaría con un solo registro.\n",
+        "\n",
+        "El costo computacional sería extremadamente alto porque tendríamos que ajustar (entrenar) el modelo 569 veces, lo que sería muy ineficiente. Aunque LOOCV puede proporcionar una estimación de rendimiento casi sin sesgos, su alto costo computacional lo hace impráctico para datasets de este tamaño o más grandes, a menos que el modelo sea muy rápido de entrenar. Además, el resultado de LOOCV a menudo tiene una alta varianza, ya que las particiones de entrenamiento en cada fold son muy similares entre sí."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "df304420",
+        "outputId": "9aea137e-28ef-4ce9-de43-70cd4ee62a6a"
+      },
+      "source": [
+        "from sklearn.linear_model import LogisticRegression\n",
+        "\n",
+        "# Ejecución y Diagnóstico de Estabilidad\n",
+        "# Instanciar el modelo de Regresión Logística\n",
+        "model = LogisticRegression(max_iter=3000, random_state=42)\n",
+        "\n",
+        "# Evaluar el modelo utilizando cross_val_score sobre el conjunto de entrenamiento\n",
+        "# Usamos X_train y y_train para la validación cruzada, ya que kf se aplica sobre ellos\n",
+        "scores = cross_val_score(model, X_train, y_train, cv=kf, scoring='accuracy')\n",
+        "\n",
+        "print(\"Métricas de exactitud (accuracy) para cada fold:\")\n",
+        "for i, score in enumerate(scores):\n",
+        "    print(f\"  Fold {i+1}: {score:.4f}\")\n",
+        "\n",
+        "print(f\"\\nExactitud promedio: {scores.mean():.4f}\")\n",
+        "print(f\"Desviación estándar de la exactitud: {scores.std():.4f}\")"
+      ],
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.12/dist-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):\n",
+            "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.\n",
+            "\n",
+            "Increase the number of iterations (max_iter) or scale the data as shown in:\n",
+            "    https://scikit-learn.org/stable/modules/preprocessing.html\n",
+            "Please also refer to the documentation for alternative solver options:\n",
+            "    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression\n",
+            "  n_iter_i = _check_optimize_result(\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Métricas de exactitud (accuracy) para cada fold:\n",
+            "  Fold 1: 0.9560\n",
+            "  Fold 2: 0.9670\n",
+            "  Fold 3: 0.9451\n",
+            "  Fold 4: 0.9560\n",
+            "  Fold 5: 0.9560\n",
+            "\n",
+            "Exactitud promedio: 0.9560\n",
+            "Desviación estándar de la exactitud: 0.0070\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ffade43f"
+      },
+      "source": [
+        "### Análisis de Estabilidad\n",
+        "\n",
+        "Observando la desviación estándar obtenida, podemos sacar conclusiones sobre la estabilidad del modelo:\n",
+        "\n",
+        "*   **Si la desviación estándar es baja (cercana a 0)**, indica que el rendimiento del modelo es consistente en los diferentes folds de validación cruzada. Esto sugiere que el modelo es estable, es decir, su rendimiento no varía drásticamente dependiendo de la partición específica de los datos de entrenamiento y validación. Un modelo estable es robusto y generaliza bien a diferentes subconjuntos de datos.\n",
+        "\n",
+        "*   **Si la desviación estándar es alta**, indica que el rendimiento del modelo varía considerablemente entre los diferentes folds. Esto podría significar que el modelo es sensible a los datos específicos de entrenamiento/validación de cada fold, lo que sugiere inestabilidad. Un modelo inestable podría estar sobreajustándose a características específicas de un fold o tener dificultades para generalizar a datos no vistos de manera consistente.\n",
+        "\n",
+        "En el caso de los resultados obtenidos (ver valores en la celda de código anterior), si la desviación estándar es relativamente pequeña (por ejemplo, por debajo de 0.05 o 0.03, dependiendo del contexto), se podría decir que el modelo de regresión logística es bastante estable. Muestra un rendimiento consistente en las diferentes divisiones de los datos, lo que es una buena señal para su capacidad de generalización."
+      ]
+    }
+  ]
+}
