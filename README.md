@@ -7,6 +7,7 @@ El objetivo del repositorio es documentar de forma progresiva los conceptos vist
 #### Práctica Tema 2
 
 [`Tema2.ipynb`](./Tema2.ipynb)
+[`Google Collab Tema 2`](./https://colab.research.google.com/drive/1o1sr76Z26OvY6fHh6VX3A5ibOzRaZUat?usp=sharing)
 
 Implementación práctica utilizando el dataset del Titanic:
 
