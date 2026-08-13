@@ -5,7 +5,7 @@ Repositorio de actividades, prácticas y ejercicios de la materia **Algoritmos d
 El objetivo del repositorio es documentar de forma progresiva los conceptos vistos durante el curso y su implementación práctica en Python, principalmente utilizando `pandas`, `NumPy` y `scikit-learn`.
 
 ---
-#### Práctica Tema 2
+#### Práctica Tema 1
 
 [`Tema2.ipynb`](./Tema2.ipynb)
 [`GoogleCollab-2`](./https://colab.research.google.com/drive/1o1sr76Z26OvY6fHh6VX3A5ibOzRaZUat?usp=sharing)
@@ -18,7 +18,7 @@ Implementación práctica utilizando el dataset del Titanic:
 4. Pipeline integrado para prevención de fugas de información.
 
 ---
-#### Práctica Tema 3
+#### Práctica Tema 2
 
 [`Tema3.ipynb`](./Tema3.ipynb)  
 [`GoogleCollab-3`](PEGAR_AQUI_LINK_DE_COLAB)
