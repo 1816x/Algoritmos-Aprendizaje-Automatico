@@ -1,14 +1,14 @@
-```markdown
 # Machine Learning Algorithms
 
 Repositorio de actividades, prácticas y ejercicios de la materia **Algoritmos de Aprendizaje Automático**.
 
-El objetivo del repositorio es documentar de forma progresiva los conceptos vistos durante el curso y su implementación práctica en Python, principalmente utilizando `pandas`, `NumPy` y `scikit-learn`.
+El objetivo del repositorio es documentar de forma progresiva los conceptos vistos durante el curso y su implementación práctica en Python, principalmente utilizando `pandas`, `NumPy`, `matplotlib` y `scikit-learn`.
 
 ---
+
 #### Práctica Tema 1
 
-[`Practica Tema 1.ipynb`](./Practica%20Tema%201.ipynb)  
+[`Practica Tema 1.ipynb`](./Practica%20Tema%201.ipynb)
 [`GoogleCollab-1`](https://colab.research.google.com/drive/1o1sr76Z26OvY6fHh6VX3A5ibOzRaZUat?usp=sharing)
 
 Implementación práctica utilizando el dataset del Titanic:
@@ -19,9 +19,10 @@ Implementación práctica utilizando el dataset del Titanic:
 4. Pipeline integrado para prevención de fugas de información.
 
 ---
+
 #### Práctica Tema 2
 
-[`Practica Tema 2.ipynb`](./Practica%20Tema%202.ipynb)  
+[`Practica Tema 2.ipynb`](./Practica%20Tema%202.ipynb)
 [`GoogleCollab-2`](https://colab.research.google.com/drive/1UNP8uvDUXwRvDFoqcpjPKSJ6i3G4Dm1M?usp=sharing)
 
 Experimento de validación utilizando el dataset de diagnóstico de cáncer de mama de Scikit-Learn:
@@ -34,9 +35,10 @@ Experimento de validación utilizando el dataset de diagnóstico de cáncer de m
 6. Uso de escalado de datos para mejorar la convergencia del modelo.
 
 ---
+
 #### Práctica Tema 3
 
-[`Practica Tema 3.ipynb`](./Practica%20Tema%203.ipynb)  
+[`Practica Tema 3.ipynb`](./Practica%20Tema%203.ipynb)
 [`GoogleCollab-3`](https://colab.research.google.com/drive/1xeGkjNstXkfuJfn1oLlDPtqDejpOIkQW?usp=sharing)
 
 Experimento de muestreo y representatividad utilizando el dataset de diagnóstico de cáncer de mama de Scikit-Learn:
@@ -53,4 +55,3 @@ Experimento de muestreo y representatividad utilizando el dataset de diagnóstic
 ---
 
 Este repositorio se irá actualizando conforme avance el curso.
-```
