@@ -1,3 +1,4 @@
+```markdown
 # Machine Learning Algorithms
 
 Repositorio de actividades, prácticas y ejercicios de la materia **Algoritmos de Aprendizaje Automático**.
@@ -7,8 +8,8 @@ El objetivo del repositorio es documentar de forma progresiva los conceptos vist
 ---
 #### Práctica Tema 1
 
-[`Practica 1.ipynb`](./Tema1.ipynb)
-[`GoogleCollab-1`](./https://colab.research.google.com/drive/1o1sr76Z26OvY6fHh6VX3A5ibOzRaZUat?usp=sharing)
+[`Practica Tema 1.ipynb`](./Practica%20Tema%201.ipynb)  
+[`GoogleCollab-1`](https://colab.research.google.com/drive/1o1sr76Z26OvY6fHh6VX3A5ibOzRaZUat?usp=sharing)
 
 Implementación práctica utilizando el dataset del Titanic:
 
@@ -20,7 +21,7 @@ Implementación práctica utilizando el dataset del Titanic:
 ---
 #### Práctica Tema 2
 
-[`Practica 2.ipynb`](./Tema2.ipynb)  
+[`Practica Tema 2.ipynb`](./Practica%20Tema%202.ipynb)  
 [`GoogleCollab-2`](https://colab.research.google.com/drive/1UNP8uvDUXwRvDFoqcpjPKSJ6i3G4Dm1M?usp=sharing)
 
 Experimento de validación utilizando el dataset de diagnóstico de cáncer de mama de Scikit-Learn:
@@ -33,13 +34,13 @@ Experimento de validación utilizando el dataset de diagnóstico de cáncer de m
 6. Uso de escalado de datos para mejorar la convergencia del modelo.
 
 ---
+#### Práctica Tema 3
 
-# Práctica Tema 3
+[`Practica Tema 3.ipynb`](./Practica%20Tema%203.ipynb)  
+[`GoogleCollab-3`](https://colab.research.google.com/drive/1xeGkjNstXkfuJfn1oLlDPtqDejpOIkQW?usp=sharing)
 
-[`Practica 3.ipynb`]
-(./Practica%20Tema%203.ipynb) [Open in Google Colab](https://colab.research.google.com/github/1816x/Algoritmos-Aprendizaje-Automatico/blob/main/Practica%20Tema%203.ipynb) 
+Experimento de muestreo y representatividad utilizando el dataset de diagnóstico de cáncer de mama de Scikit-Learn:
 
-Experimento de muestreo y representatividad utilizando el dataset de diagnóstico de cáncer de mama de Scikit-Learn: 
 1. Análisis de la distribución original de las clases.
 2. Generación de diferentes particiones mediante muestreo aleatorio simple.
 3. Comparación de distintos valores de `test_size` y `random_state`.
@@ -49,5 +50,7 @@ Experimento de muestreo y representatividad utilizando el dataset de diagnóstic
 7. Comparación entre la distribución original, el muestreo aleatorio y el muestreo estratificado.
 8. Análisis del impacto del tamaño de muestra sobre la representatividad de los datos.
 
+---
 
 Este repositorio se irá actualizando conforme avance el curso.
+```
